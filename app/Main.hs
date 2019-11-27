@@ -1,6 +1,5 @@
 module Main where
 
-import Control.Monad (forever)
 import Prelude hiding (Left, Right)
 
 data Crayon = TaillerCrayon Float Float Float deriving(Show)
@@ -14,8 +13,6 @@ data TypeInstruction = Forward Float
                      deriving (Show, Read)
 
 -- Variables
-enonce = "[Forward 100, Repeat  4 [Forward 50, Left 90], Forward 100]"
-programme = parse enonce
 monCrayon = TaillerCrayon 100.0 100.0 0.0
 svgList = "<?xml version=\"1.0\" encoding=\"utf-8\"?><svg xmlns=\"http://www.w3.org/2000/svg\" version=\"1.1\" width=\"400\" height=\"400\"><title>Exemple</title>"
 
@@ -42,6 +39,9 @@ fonctionnement (instruction:resteProgramme) (TaillerCrayon x y angle) listesvg =
 
 main :: IO ()
 main = do
+    putStrLn "Entrez un programme (entre crochets, avec les mots-clés Forward, Left, Right ou repeat [])"
+    line <- getLine
+    let programme = parse line
     let svg = fonctionnement programme monCrayon svgList
     putStrLn svg
     writeFile "s.svg" svg
