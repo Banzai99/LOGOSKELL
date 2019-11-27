@@ -2,10 +2,13 @@ module Main where
 
 import Prelude hiding (Left, Right)
 
+-- Type Crayon pour gérer les coordonnées et l'angle
 data Crayon = TaillerCrayon Float Float Float deriving(Show)
 
+-- Type Programme qui est juste un nom plus compréhensible pour la liste d'instructions
 type Programme = [TypeInstruction]
 
+-- Type TypeInstruction qui permet à la fonction read de convertir la liste donnée en entrée en liste d'instructions.
 data TypeInstruction = Forward Float
                      | Repeat Int [TypeInstruction]
                      | Left Float
